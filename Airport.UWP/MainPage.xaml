@@ -1,0 +1,70 @@
+﻿<Page
+    x:Class="Airport.UWP.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Airport.UWP"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <SplitView x:Name="MainSplitView" DisplayMode="CompactOverlay"  IsPaneOpen="False" 
+               CompactPaneLength="50" OpenPaneLength="200">
+        <SplitView.Pane>
+            <StackPanel Background="Beige">
+                <Button x:Name="HamburgerButton" FontFamily="Segoe MDL2 Assets" Content="&#xE700;"
+                    Width="50" Height="50" Background="Transparent" Click="HamburgerButton_Click" />
+                <StackPanel Orientation="Horizontal">
+                    <Button
+                        x:Name="AirhostessesButton"
+                        FontFamily="Segoe MDL2 Assets"
+                        Content="&#xE709;"
+                        Width="50"
+                        Height="50"
+                        Background="Transparent"
+                        Click="AirhostessesButton_Click"/>
+                    <TextBlock Text="Airhostesses" FontSize="18" VerticalAlignment="Center" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Name="CrewsButton" FontFamily="Segoe MDL2 Assets" Content="&#xE709;"
+                        Width="50" Height="50" Background="Transparent"/>
+                    <TextBlock Text="Crews" FontSize="18" VerticalAlignment="Center" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Name="DeparturesButton" FontFamily="Segoe MDL2 Assets" Content="&#xE709;"
+                        Width="50" Height="50" Background="Transparent"/>
+                    <TextBlock Text="Departures" FontSize="18" VerticalAlignment="Center" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Name="FlightsButton" FontFamily="Segoe MDL2 Assets" Content="&#xE709;"
+                        Width="50" Height="50" Background="Transparent"/>
+                    <TextBlock Text="Flights" FontSize="18" VerticalAlignment="Center" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Name="PilotsButton" FontFamily="Segoe MDL2 Assets" Content="&#xE709;"
+                        Width="50" Height="50" Background="Transparent"/>
+                    <TextBlock Text="Pilots" FontSize="18" VerticalAlignment="Center" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Name="PlanesButton" FontFamily="Segoe MDL2 Assets" Content="&#xE709;"
+                        Width="50" Height="50" Background="Transparent"/>
+                    <TextBlock Text="Planes" FontSize="18" VerticalAlignment="Center" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Name="PlaneTypesButton" FontFamily="Segoe MDL2 Assets" Content="&#xE709;"
+                        Width="50" Height="50" Background="Transparent"/>
+                    <TextBlock Text="PlaneTypes" FontSize="18" VerticalAlignment="Center" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Name="TicketsButton" FontFamily="Segoe MDL2 Assets" Content="&#xE709;"
+                        Width="50" Height="50" Background="Transparent"/>
+                    <TextBlock Text="Tickets" FontSize="18" VerticalAlignment="Center" />
+                </StackPanel>
+            </StackPanel>
+        </SplitView.Pane>
+        <SplitView.Content>
+            <Grid>
+                <Frame x:Name="contentFrame"/>
+            </Grid>
+        </SplitView.Content>
+    </SplitView>
+</Page>
