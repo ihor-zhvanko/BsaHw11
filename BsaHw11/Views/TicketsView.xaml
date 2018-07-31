@@ -1,0 +1,116 @@
+﻿<Page
+    x:Class="BsaHw11.Views.TicketsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:BsaHw11.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converter="using:BsaHw11.Converters"
+    DataContext="{Binding TicketsVMInstance, Source={StaticResource Locator}}"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <converter:DoubleConverter x:Name="DoubleConverter"/>
+        <converter:NumberConverter x:Name="NumberConverter"/>
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="0,0,0,0" Width="Auto">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel>
+            <Rectangle Fill="{StaticResource TealBrush}" x:Name="myPanel" Height="100"  VerticalAlignment="Top" HorizontalAlignment="Stretch"/>
+            <TextBlock Text="Tickets" Margin="20,-70,0,0" Foreground="White" FontSize="26" FontWeight="Bold" CharacterSpacing="70"></TextBlock>
+            <Button Background="AntiqueWhite" Content="Create" Margin="20, 10" Padding="20,5,20,5" VerticalAlignment="Top" HorizontalAlignment="Right" Click="Button_Click" FontSize="18"></Button>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Margin="20,20,20,20" Text="{Binding SelectedTicket.Id}"></TextBlock>
+                <TextBox Grid.Column="1" Margin="20,20,20,20" Text="{Binding SelectedTicket.Price, Mode=TwoWay, Converter={StaticResource DoubleConverter}}"></TextBox>
+                <TextBox Grid.Column="2" Margin="20,20,20,20" Text="{Binding SelectedTicket.FlightId, Mode=TwoWay, Converter={StaticResource NumberConverter}}"></TextBox>
+                <Button Grid.Column="3" Content="Update" Command="{Binding UpdateTicket}"></Button>
+                <Button Grid.Column="4" Content="Delete" Background="OrangeRed" Command="{Binding DeleteTicket}"></Button>
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Padding="20,10,0,10" Text="Id"></TextBlock>
+                <TextBlock Grid.Column="1" Padding="20,10,0,10" Text="Price"></TextBlock>
+                <TextBlock Grid.Column="2" Padding="20,10,0,10" Text="Flight Id"></TextBlock>
+            </Grid>
+            <ListView ItemsSource="{Binding Tickets}" SelectedItem="{Binding SelectedTicket, Mode=TwoWay}" Height="500" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="0,0,0,0" Width="Auto" HorizontalAlignment="Stretch">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="{Binding Id}"
+                                       Foreground="Black"
+                                       FontSize="16"
+                                       Padding="20,0,0,0" />
+
+                            <TextBlock Grid.Column="1" Text="{Binding Price}"
+                                       Foreground="Black"
+                                       FontSize="16"
+                                       Padding="20,0,0,0" />
+                            <TextBlock Grid.Column="2" Text="{Binding FlightId}"
+                                        Foreground="Black"
+                                        FontSize="16"
+                                        Padding="20,0,0,0" />
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        <Setter Property="Width" Value="Auto"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
+            </ListView>
+        </StackPanel>
+
+        <SplitView x:Name="RightPanel" DisplayMode="CompactOverlay"  IsPaneOpen="False" CompactPaneLength="0" OpenPaneLength="340" FlowDirection="RightToLeft">
+            <SplitView.Pane>
+                <StackPanel VerticalAlignment="Center" Margin="0,-100,0,0" Width="Auto" >
+                    <TextBlock 
+                        Text="New"
+                        HorizontalAlignment="Center" Margin="0, 40, 10, 20" FontSize="24" 
+                                />
+
+                    <TextBlock Text="Price" HorizontalAlignment="Right" Margin="20, 0, 20, 5" FontSize="18" />
+                    <TextBox Text="{Binding NewTicket.Price, Mode=TwoWay, Converter={StaticResource DoubleConverter}}"
+                        Height="40" Margin="20,0,20,0" PlaceholderText="Price" FontSize="18"></TextBox>
+
+                    <TextBlock Text="Flight Id" HorizontalAlignment="Right" Margin="20, 25, 20, 5" FontSize="18" />
+                    <TextBox TextWrapping="Wrap" Text="{Binding NewTicket.FlightId, Mode=TwoWay, Converter={StaticResource NumberConverter}}"
+                        Height="40" Margin="20,0,20,0" PlaceholderText="Flight Id" FontSize="18"></TextBox>
+
+                    <Button Command="{Binding CreateTicket}" Click="Save_Click"
+                        HorizontalAlignment="Center" Margin="0,40,0,0" Content="Save" FontSize="18" Padding="40,5,40,5" />
+                </StackPanel>
+
+            </SplitView.Pane>
+        </SplitView>
+
+    </Grid>
+</Page>

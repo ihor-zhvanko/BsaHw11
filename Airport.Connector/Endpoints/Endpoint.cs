@@ -34,12 +34,14 @@ namespace Airport.Connector.Endpoints
         {
             var httpClient = GetHttpClient();
             var json = JsonConvert.SerializeObject(inputModel);
-            var content = new HttpStringContent(json, UnicodeEncoding.Utf8);
+            var content = new HttpStringContent(json, UnicodeEncoding.Utf8, "application/json");
             var uri = new Uri(baseUri, "");
 
             var response = await httpClient.PostAsync(uri, content);
 
-            return default(TModel);
+            var jsonResponce = response.Content.ToString();
+
+            return JsonConvert.DeserializeObject<TModel>(jsonResponce);
         }
 
         public async Task Delete(int id)
@@ -64,12 +66,14 @@ namespace Airport.Connector.Endpoints
         {
             var httpClient = GetHttpClient();
             var json = JsonConvert.SerializeObject(inputModel);
-            var content = new HttpStringContent(json, UnicodeEncoding.Utf8);
+            var content = new HttpStringContent(json, UnicodeEncoding.Utf8, "application/json");
             var uri = new Uri(baseUri, $"{id}");
 
             var response = await httpClient.PutAsync(uri, content);
 
-            return default(TModel);
+            var jsonResponce = response.Content.ToString();
+
+            return JsonConvert.DeserializeObject<TModel>(jsonResponce);
         }
 
         protected async Task<T> Get<T>(string url)
@@ -87,6 +91,7 @@ namespace Airport.Connector.Endpoints
             aHBPF.IgnorableServerCertificateErrors.Add(ChainValidationResult.Expired);
             aHBPF.IgnorableServerCertificateErrors.Add(ChainValidationResult.Untrusted);
             return new HttpClient(aHBPF);
+
         }
 
         
